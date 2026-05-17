@@ -1,0 +1,29 @@
+name: "Extract ZIP Otomatis"
+
+on:
+  workflow_dispatch: # Agar bisa dijalankan manual dengan tombol
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Izin untuk menambah file ke repo Anda
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Ekstrak file ZIP
+        run: |
+          # Cari file ZIP apa saja di root (kita asumsikan namanya mengandung '.zip')
+          ZIP_FILE=$(ls *.zip | head -1)
+          echo "Mengekstrak $ZIP_FILE..."
+          unzip "$ZIP_FILE" -d .
+          rm "$ZIP_FILE" # Hapus file ZIP setelah diekstrak agar tidak dobel
+
+      - name: Simpan perubahan ke Repo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Berhasil mengekstrak file proyek dari ZIP"
+          git push
