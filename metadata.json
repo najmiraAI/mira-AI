@@ -1,0 +1,12 @@
+{
+  "name": "MiraBrowser",
+  "description": "Native Android Automated Browser with AI Agent Control and Background Automation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
